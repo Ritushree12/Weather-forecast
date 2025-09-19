@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="min-h-screen w-full ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <title>Weather</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+</head>
+
+<body class="min-h-screen w-full ">
+    <!-- Header -->
+    <header class="w-full text-center py-6 bg-slate-800 text-white text-4xl font-bold shadow-lg">
+        Weather Report
+    </header>
+
+    <!-- Main Container -->
+    <div
+        class="outer-container flex flex-col lg:flex-row lg:self-center min-h-screen bg-slate-900 w-full items-center justify-center lg:items-start lg:justify-start">
+
+        <!-- Left Panel (Search box) -->
+        <div class="inner-container 
+            border-2 border-slate-700 bg-slate-700 
+            flex flex-col items-center 
+            h-auto 
+            mx-4 mt-6 mb-6 p-4 
+            rounded-md shadow-lg 
+            w-11/12 sm:w-[360px] md:w-[420px] lg:w-[480px]">
+
+            <div class="city-selection border-2 border-slate-600 bg-slate-100 text-2xl 
+                  flex flex-col text-slate-800 rounded-md p-6 shadow w-full">
+
+                <!-- City Input -->
+                <div class="relative w-full">
+                    <label for="city" class="text-2xl italic p-2 text-slate-700 font-extrabold">Enter City</label>
+                    <div class="flex items-stretch w-full mt-2 mb-2">
+                        <input type="text" placeholder="Enter city name" autocomplete="off" id="city" class="city-input rounded-l-md border-2 border-slate-400 p-2 bg-slate-50 italic w-full 
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition">
+                        <button id="search-btn"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition flex items-center justify-center">
+                            🔍
+                        </button>
+                    </div>
+
+                    <!-- Dropdown for recent cities -->
+                    <ul id="recent-cities"
+                        class="hidden absolute left-0 w-full p-2 z-10 bg-white border border-slate-300 rounded-md mt-1 shadow-lg">
+                    </ul>
+                </div>
+
+                <span class="self-center text-gray-700 mb-4"> or</span>
+
+                <!-- Current Location Button -->
+                <button type="button" class="transform transition duration-200 ease-in-out 
+                 hover:scale-105 hover:bg-blue-700 hover:text-white 
+                 active:scale-95 rounded-md shadow-lg border-2 italic border-blue-800 
+                 text-white w-full p-2 cursor-pointer bg-blue-600 self-center current-location mt-2">
+                    Search by Current City
+                </button>
+
+                <!-- Error Message -->
+                <h5 class="text-red-500 font-extrabold error-msg text-xs mt-2"></h5>
+            </div>
+        </div>
+
+        <!-- Right Panel (Results) -->
+        <div class="hidden result-container w-full md:w-2/3 lg:w-3/4 px-2 md:px-4 py-4 flex-col flex-1 overflow-y-auto">
+            <div class="basic-weather flex-1 flex justify-center items-start">
+                <div id="bg-container" class="relative h-[50vh] sm:h-[55vh] md:h-[60vh]
+ w-full max-w-[600px] m-4 rounded-md bg-cover bg-center transition-all duration-500 p-6 sm:p-8">
+
+                    <!-- Overlay -->
+                    <div id="overlay" class="hidden overlay absolute inset-0 bg-slate-900/60 rounded-md"></div>
+
+                    <!-- Weather Info -->
+                    <div class="relative z-10 text-slate-100 flex flex-col space-y-2">
+                        <h1 class="text-3xl sm:text-4xl md:text-5xlfont-bold text-blue-200" id="city-name"></h1>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mt-2 text-blue-100" id="weather-desc"></h3>
+                        <h5 class="text-sm sm:text-lg md:text-xl" id="temp"></h5>
+                        <h5 class="text-sm sm:text-lg md:text-xl" id="min-temp"></h5>
+                        <h5 class="text-sm sm:text-lg md:text-xl" id="max-temp"></h5>
+                        <h5 class="text-sm sm:text-lg md:text-xl" id="humidity"></h5>
+                        <h5 class="text-sm sm:text-lg md:text-xl" id="pressure"></h5>
+
+                        <!-- Unit Toggle -->
+                        <div id="unit-toggle" class="hidden m-0 unit-toggle items-center space-x-2 mt-4 z-20">
+                            <button id="celsius-btn"
+                                class="px-3 sm:px-4 py-1 sm:py-2 bg-blue-600 text-white rounded-full">°C</button>
+                            <button id="fahrenheit-btn"
+                                class="px-3 sm:px-4 py-1 sm:py-2 bg-gray-200 text-gray-800 rounded-full">°F</button>
+                        </div>
+                        <!--Alert Messages-->
+                        <div id="weather-alert" class="hidden border-l-4 p-4 mt-4" role="alert">
+                            <p id="alert-message"></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="forecast-container" class="hidden flex pb-10 flex-wrap gap-4 justify-center
+                     p-2 sm:p-4 w-full">
+
+            </div>
+        </div>
+
+    </div>
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
